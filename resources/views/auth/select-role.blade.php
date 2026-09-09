@@ -1,11 +1,11 @@
 @extends('layouts.guest')
 @section('title', 'Selecciona tu Perfil')
-@section('meta_description', 'Elige entre Emprendedor o Inversionista en INVESTA.')
+@section('meta_description', 'Elige entre Emprendedor o Inversionista en WaySociety.')
 
 @section('content')
 <div class="auth-card" style="max-width:540px;">
     <div class="auth-card-header">
-        <span class="auth-logo">INVESTA</span>
+        <span class="auth-logo">WaySociety</span>
         <h2 style="font-size:1.6rem;color:var(--white);margin-bottom:0.25rem;">¿Cuál es tu perfil?</h2>
         <p style="font-size:0.85rem;color:var(--white-dim);">Selecciona el tipo que mejor te describe</p>
     </div>
