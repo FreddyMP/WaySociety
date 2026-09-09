@@ -31,8 +31,8 @@ class ProfileController extends Controller
         $data = $request->only('name', 'phone', 'city', 'bio');
 
         if ($request->hasFile('avatar')) {
-            if ($user->avatar) Storage::disk('public')->delete($user->avatar);
-            $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
+            if ($user->avatar) Storage::disk('s3')->delete($user->avatar);
+            $data['avatar'] = $request->file('avatar')->store('avatars', 's3');
         }
 
         if ($request->filled('password')) {

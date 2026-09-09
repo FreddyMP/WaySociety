@@ -51,11 +51,11 @@ class CompanyController extends Controller
         $data['user_id'] = Auth::id();
 
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('logos', 'public');
+            $data['logo'] = $request->file('logo')->store('logos', 's3');
         }
 
         if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $request->file('cover_image')->store('covers', 'public');
+            $data['cover_image'] = $request->file('cover_image')->store('covers', 's3');
         }
 
         $company = Company::create($data);
@@ -72,7 +72,7 @@ class CompanyController extends Controller
                 ]);
 
                 if (isset($productData['image']) && $productData['image'] instanceof \Illuminate\Http\UploadedFile) {
-                    $product->image = $productData['image']->store('products', 'public');
+                    $product->image = $productData['image']->store('products', 's3');
                 }
 
                 $company->products()->save($product);
@@ -124,13 +124,13 @@ class CompanyController extends Controller
         $data = $request->except(['logo', 'cover_image', '_token', '_method']);
 
         if ($request->hasFile('logo')) {
-            if ($company->logo) Storage::disk('public')->delete($company->logo);
-            $data['logo'] = $request->file('logo')->store('logos', 'public');
+            if ($company->logo) Storage::disk('s3')->delete($company->logo);
+            $data['logo'] = $request->file('logo')->store('logos', 's3');
         }
 
         if ($request->hasFile('cover_image')) {
-            if ($company->cover_image) Storage::disk('public')->delete($company->cover_image);
-            $data['cover_image'] = $request->file('cover_image')->store('covers', 'public');
+            if ($company->cover_image) Storage::disk('s3')->delete($company->cover_image);
+            $data['cover_image'] = $request->file('cover_image')->store('covers', 's3');
         }
 
         $company->update($data);
@@ -142,8 +142,8 @@ class CompanyController extends Controller
     {
         Gate::authorize('delete', $company);
 
-        if ($company->logo) Storage::disk('public')->delete($company->logo);
-        if ($company->cover_image) Storage::disk('public')->delete($company->cover_image);
+        if ($company->logo) Storage::disk('s3')->delete($company->logo);
+        if ($company->cover_image) Storage::disk('s3')->delete($company->cover_image);
 
         $company->delete();
 
