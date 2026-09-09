@@ -85,11 +85,26 @@ $(document).ready(function() {
 
     // ─── Send to Investor Modal ───────────────────────────────
     window.openSendInvestorModal = function(companyId, companyName) {
-        $('#sendCompanyId').val(companyId);
         $('#sendCompanyName').text(companyName);
+        $('#sendInvestorForm').attr('action', '/entrepreneur/companies/' + companyId + '/send');
         $('#sendInvestorModal').addClass('active');
         $('body').css('overflow', 'hidden');
     };
+
+    $(document).on('click', '.btn-send-company', function() {
+        const companyId = $(this).data('company');
+        const companyName = $(this).data('name');
+        window.openSendInvestorModal(companyId, companyName);
+    });
+
+    $(document).on('submit', '#sendInvestorForm', function(e) {
+        const action = $(this).attr('action');
+        if (!action || action === '#' || action === '') {
+            e.preventDefault();
+            return false;
+        }
+        $('#btnSubmitSend').html('<span class="spinner"></span> Enviando...').prop('disabled', true);
+    });
     
     // ─── Notifications Logic ──────────────────────────────────
     function fetchUnreadCount() {

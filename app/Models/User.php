@@ -64,7 +64,7 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute(): string
     {
         if ($this->avatar) {
-            return asset('storage/' . $this->avatar);
+            return str_starts_with($this->avatar, 'http') ? $this->avatar : \Illuminate\Support\Facades\Storage::url($this->avatar);
         }
         return asset('images/default-avatar.png');
     }

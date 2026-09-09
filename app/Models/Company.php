@@ -48,7 +48,7 @@ class Company extends Model
     public function getLogoUrlAttribute(): string
     {
         if ($this->logo) {
-            return asset('storage/' . $this->logo);
+            return str_starts_with($this->logo, 'http') ? $this->logo : \Illuminate\Support\Facades\Storage::url($this->logo);
         }
         return asset('images/default-logo.png');
     }
@@ -56,7 +56,7 @@ class Company extends Model
     public function getCoverUrlAttribute(): string
     {
         if ($this->cover_image) {
-            return asset('storage/' . $this->cover_image);
+            return str_starts_with($this->cover_image, 'http') ? $this->cover_image : \Illuminate\Support\Facades\Storage::url($this->cover_image);
         }
         return asset('images/default-cover.jpg');
     }

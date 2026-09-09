@@ -21,7 +21,7 @@ class Product extends Model
     public function getImageUrlAttribute(): string
     {
         if ($this->image) {
-            return asset('storage/' . $this->image);
+            return str_starts_with($this->image, 'http') ? $this->image : \Illuminate\Support\Facades\Storage::url($this->image);
         }
         return asset('images/default-product.png');
     }

@@ -7,7 +7,7 @@
         </div>
         
         <div class="modal-body">
-            <form action="" method="POST" id="sendInvestorForm">
+            <form action="#" method="POST" id="sendInvestorForm">
                 @csrf
                 <p style="color:var(--white-soft); font-size:0.9rem; margin-bottom:1.5rem;">
                     Enviar <strong style="color:var(--gold);" id="sendCompanyName">Empresa</strong> a un inversionista para revisión.
@@ -45,20 +45,3 @@
     </div>
 </div>
 
-<script>
-// Logic to set action URL dynamically
-$('#sendInvestorModal').on('show', function() {
-    // This is handled by openSendInvestorModal in app.js
-});
-
-window.openSendInvestorModal = function(companyId, companyName) {
-    $('#sendCompanyName').text(companyName);
-    $('#sendInvestorForm').attr('action', `/entrepreneur/companies/${companyId}/send`);
-    $('#sendInvestorModal').addClass('active');
-    $('body').css('overflow', 'hidden');
-};
-
-$('#sendInvestorForm').on('submit', function() {
-    $('#btnSubmitSend').html('<span class="spinner"></span> Enviando...').prop('disabled', true);
-});
-</script>

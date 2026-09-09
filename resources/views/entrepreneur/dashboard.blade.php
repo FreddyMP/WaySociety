@@ -116,14 +116,4 @@
 </div>
 @endif
 
-@push('scripts')
-<script>
-// Send to investor button
-$('.btn-send-company').on('click', function() {
-    const companyId = $(this).data('company');
-    const companyName = $(this).data('name');
-    openSendInvestorModal(companyId, companyName);
-});
-</script>
-@endpush
 @endsection

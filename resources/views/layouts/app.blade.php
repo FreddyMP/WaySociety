@@ -204,14 +204,16 @@
         </div>
     </div>
 
+
     {{-- Contact Modal --}}
     @include('shared.contact-modal')
 
-    {{-- Send to Investor Modal --}}
-    @include('shared.send-investor-modal')
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    {{-- Send to Investor Modal (after jQuery so inline handlers bind correctly) --}}
+    @include('shared.send-investor-modal')
+
     @stack('scripts')
 </body>
 
